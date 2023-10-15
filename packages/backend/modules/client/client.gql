@@ -1,0 +1,30 @@
+type Client {
+  id: ID!
+  name: String
+  connected: Boolean
+  lastConnected: DateTime
+}
+
+input ClientCreate {
+  name: String
+  connected: Boolean
+}
+
+input ClientWhere {
+  connected: Boolean
+}
+
+input ClientWhereUnique {
+  id: ID!
+}
+
+type Query {
+  clients(where: ClientWhere): [Client!]!
+  client(where: ClientWhereUnique!): Client
+}
+
+type Mutation {
+  clientConnected(id: ID!): Client!
+  clientDisconnected(id: ID!): Client!
+  clientCreate(data: ClientCreate!): Client!
+}

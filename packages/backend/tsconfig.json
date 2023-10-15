@@ -1,0 +1,11 @@
+{
+  "extends": "@unit/tsconfig/tsconfig.node.json",
+  "compilerOptions": {
+    "paths": {
+      "@modules/*": ["./modules/*", "./modules/"],
+      "@lib/*": ["./lib/*", "./lib/"],
+      "@typings/*": ["./typings/*", "./typings/"],
+      "@utils/*": ["./utils/*", "./utils/"]
+    }
+  }
+}

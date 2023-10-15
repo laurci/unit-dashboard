@@ -1,0 +1,44 @@
+type Log {
+  id: ID!
+  type: LogType!
+  title: String!
+  description: String!
+  clientId: String
+  client: Client
+  createdAt: DateTime!
+}
+
+extend type Client {
+  logs: [Log!]
+}
+
+enum LogType {
+  DEBUG
+  INFO
+  WARNING
+  ERROR
+}
+
+input LogCreate {
+  type: LogType!
+  title: String!
+  description: String!
+  clientId: String
+}
+
+input LogWhere {
+  clientId: String
+}
+
+input LogWhereUnique {
+  id: ID!
+}
+
+type Query {
+  logs(where: LogWhere): [Log!]!
+  log(where: LogWhereUnique!): Log
+}
+
+type Mutation {
+  logCreate(data: LogCreate!): Log!
+}

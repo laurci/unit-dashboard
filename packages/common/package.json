@@ -1,0 +1,8 @@
+{
+  "name": "@unit/common",
+  "private": true,
+  "devDependencies": {
+    "@unit/tsconfig": "workspace:^",
+    "typescript": "^5.2.2"
+  }
+}

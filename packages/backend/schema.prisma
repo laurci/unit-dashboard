@@ -1,0 +1,44 @@
+generator client {
+    provider = "prisma-client-js"
+    output   = "./__generated__/prisma"
+}
+
+datasource db {
+    provider = "postgresql"
+    url      = env("DATABASE_URL")
+}
+
+model Client {
+    id        String    @id @default(cuid())
+    name      String?
+    connected Boolean   @default(false)
+    lastSeen  DateTime?
+    createdAt DateTime  @default(now())
+    messages  Message[]
+    logs      Log[]
+}
+
+model Message {
+    id        String   @id @default(cuid())
+    clientId  String
+    client    Client   @relation(fields: [clientId], references: [id])
+    value     String
+    createdAt DateTime @default(now())
+}
+
+enum LogType {
+    DEBUG
+    INFO
+    WARNING
+    ERROR
+}
+
+model Log {
+    id          String   @id @default(cuid())
+    clientId    String?
+    title       String
+    description String
+    type        LogType
+    createdAt   DateTime @default(now())
+    client      Client?  @relation(fields: [clientId], references: [id])
+}

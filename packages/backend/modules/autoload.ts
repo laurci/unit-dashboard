@@ -17,6 +17,8 @@ import "./message/message.mutation";
 
 import "./message/message.query";
 
+import "./scalars/scalars.resolver";
+
 import "./baeta-directives/directives.baeta";
 
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";

@@ -35,15 +35,15 @@ const auth = authExtension<Context>(
   },
   {
     defaultScopes: {
-      Query: {
-        isLoggedIn: true,
-      },
-      Mutation: {
-        isLoggedIn: true,
-      },
-      Subscription: {
-        isLoggedIn: true,
-      },
+      // Query: {
+      //   isLoggedIn: true,
+      // },
+      // Mutation: {
+      //   isLoggedIn: true,
+      // },
+      // Subscription: {
+      //   isLoggedIn: true,
+      // },
     },
   }
 );

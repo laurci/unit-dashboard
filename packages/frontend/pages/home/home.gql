@@ -1,0 +1,12 @@
+query GetClients {
+    clients {
+        ...Client
+    }
+}
+
+fragment Client on Client {
+    id
+    name
+    connected
+    lastConnected
+}

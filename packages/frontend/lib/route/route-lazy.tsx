@@ -1,3 +1,4 @@
+import { Loading } from '@components/loading';
 import { ReactNode, Suspense } from 'react';
 export { Link as RouterLink } from 'react-router-dom';
 
@@ -6,6 +7,6 @@ interface LazyRouteProps {
   fallback?: NonNullable<ReactNode>;
 }
 
-export function LazyRoute(props: LazyRouteProps) {
-  return <Suspense fallback={props.fallback ?? <div>loading...</div>}>{props.element}</Suspense>;
+export function RouteLazy(props: LazyRouteProps) {
+  return <Suspense fallback={props.fallback ?? <Loading />}>{props.element}</Suspense>;
 }

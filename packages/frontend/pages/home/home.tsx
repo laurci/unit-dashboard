@@ -1,13 +1,24 @@
-import { Link, Outlet } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
+import { Loading } from '@components/loading/loading';
+import { TopbarPortal } from '@components/topbar';
+import { GetClients } from './home.gql';
 
 export default function Home() {
+  const { data, loading, error } = useQuery(GetClients);
+
+  if (loading) {
+    return <Loading />;
+  }
+
+  console.log(data);
+
   return (
-    <div className="flex flex-col">
-      <h1 className="mb-2">Home page</h1>
-      <Link to="/user">Go to user</Link>
-      <div className="bg-red-300">
-        <Outlet />
-      </div>
-    </div>
+    <>
+      <TopbarPortal>
+        <h1 className="mb-2">Home page</h1>
+      </TopbarPortal>
+
+      
+    </>
   );
 }

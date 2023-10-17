@@ -1,4 +1,4 @@
-import { LazyRoute } from '@components/lazy-route';
+import { RouteLazy } from '@lib/route/route-lazy';
 import { LazyExoticComponent, ReactNode } from 'react';
 
 export type RouteElement = (() => JSX.Element) | LazyExoticComponent<() => JSX.Element> | null;
@@ -13,7 +13,7 @@ export function createRouteElement(
   let loadable = null;
 
   if (Child != null) {
-    loadable = <LazyRoute element={<Child />} fallback={fallback} />;
+    loadable = <RouteLazy element={<Child />} fallback={fallback} />;
   }
 
   return createWrapper?.(loadable) ?? loadable;

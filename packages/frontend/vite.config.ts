@@ -25,6 +25,10 @@ export default defineConfig({
         replacement: '/lib/',
       },
       {
+        find: /^@pages\//,
+        replacement: '/pages/',
+      },
+      {
         find: /^@providers\//,
         replacement: '/providers/',
       },

@@ -25,6 +25,7 @@
       "@components/*": ["./components/*", "./components/"],
       "@lib/*": ["./lib/*", "./lib/"],
       "@hooks/*": ["./hooks/*", "./hooks/"],
+      "@pages/*": ["./pages/*", "./pages/"],
       "@providers/*": ["./providers/*", "./providers/"],
       "@typings/*": ["./typings/*", "./typings/"],
       "@utils/*": ["./utils/*", "./utils/"]

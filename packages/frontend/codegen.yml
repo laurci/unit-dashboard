@@ -1,0 +1,22 @@
+overwrite: true
+schema:
+  - ../schemas/*.gql
+  - ./schemas/*.gql
+documents:
+  - "./**/*.(gql)"
+generates:
+  __generated__/types.ts:
+    plugins:
+      - typescript
+  ./:
+    preset: near-operation-file
+    presetConfig:
+      extension: .gql.ts
+      baseTypesPath: __generated__/types
+    plugins:
+      - typescript-operations
+      - typed-document-node
+    config:
+      documentVariableSuffix: ""
+      fragmentVariableSuffix: ""
+      documentNodeImport: "@apollo/client#TypedDocumentNode"

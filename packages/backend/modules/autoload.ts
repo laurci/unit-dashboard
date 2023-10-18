@@ -9,13 +9,19 @@ import "./client/client.mutation";
 
 import "./client/client.query";
 
+import "./client/client.subscription";
+
 import "./log/log.mutation";
 
 import "./log/log.query";
 
+import "./log/log.subscription";
+
 import "./message/message.mutation";
 
 import "./message/message.query";
+
+import "./message/message.subscription";
 
 import "./scalars/scalars.resolver";
 

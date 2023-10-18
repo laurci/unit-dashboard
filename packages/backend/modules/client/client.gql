@@ -32,7 +32,7 @@ type Mutation {
 }
 
 type Subscription {
-  clientConnected(): Client!
-  clientDisconnected(): Client!
-  clientCreated(): Client!
+  clientConnected: Client!
+  clientDisconnected: Client!
+  clientCreated: Client!
 }

@@ -42,3 +42,7 @@ type Query {
 type Mutation {
   logCreate(data: LogCreate!): Log!
 }
+
+type Subscription {
+  logCreated: Log!
+}

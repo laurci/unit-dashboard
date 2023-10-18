@@ -25,3 +25,7 @@ input MessageCreate {
 type Mutation {
   createMessage(data: MessageCreate!): Message!
 }
+
+type Subscription {
+  messageCreated: Message!
+}

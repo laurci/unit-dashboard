@@ -8,6 +8,9 @@ Query.clients(({ args }) => {
     where: {
       connected: args?.where?.connected,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 });
 

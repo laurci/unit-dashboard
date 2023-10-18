@@ -2,7 +2,7 @@ import { PropsWithChildren, useMemo } from 'react';
 import { createPortal } from 'react-dom';
 
 export function Topbar() {
-  return <div id="topbar" className="w-full p-4"></div>;
+  return <div id="topbar" className="w-full p-4 border-b empty:hidden flex flex-row"></div>;
 }
 
 export function TopbarPortal(props: PropsWithChildren) {

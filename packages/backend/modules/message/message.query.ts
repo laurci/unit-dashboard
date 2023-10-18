@@ -10,7 +10,11 @@ Client.messages(async ({ root }) => {
         id: root.id,
       },
     })
-    .messages();
+    .messages({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 });
 
 Message.client(({ root }) => {

@@ -6,6 +6,9 @@
     "prisma": "pnpify prisma",
     "start": "baeta build --watch --generate --onSuccess='dotenv -- node --enable-source-maps --inspect dist/app'"
   },
+  "prisma": {
+    "seed": "yarn node dist/seed.js"
+  },
   "dependencies": {
     "@apollo/server": "^4.9.4",
     "@baeta/core": "^0.0.28",
@@ -30,6 +33,7 @@
     "@baeta/plugin-autoload": "^0.0.3",
     "@baeta/plugin-directives": "^0.0.7",
     "@baeta/plugin-prisma": "^0.0.18",
+    "@ngneat/falso": "^7.1.1",
     "@prisma/client": "5.4.2",
     "@types/body-parser": "^1.19.3",
     "@types/cors": "^2.8.14",

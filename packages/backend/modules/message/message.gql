@@ -1,9 +1,15 @@
 type Message {
   id: ID!
   value: String!
+  direction: MessageDirection!
   clientId: ID!
   client: Client
   createdAt: DateTime!
+}
+
+enum MessageDirection {
+  IN
+  OUT
 }
 
 extend type Client {
@@ -13,6 +19,7 @@ extend type Client {
 input MessageCreate {
   value: String!
   clientId: ID!
+  direction: MessageDirection!
 }
 
 type Mutation {

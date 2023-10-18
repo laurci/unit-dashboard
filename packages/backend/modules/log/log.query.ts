@@ -8,6 +8,9 @@ Query.logs(({ args }) => {
     where: {
       clientId: args?.where?.clientId,
     },
+    orderBy: {
+      createdAt: 'desc',
+    },
   });
 });
 
@@ -26,5 +29,9 @@ Client.logs(({ root }) => {
         id: root.id,
       },
     })
-    .logs();
+    .logs({
+      orderBy: {
+        createdAt: 'desc',
+      },
+    });
 });

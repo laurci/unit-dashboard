@@ -8,7 +8,7 @@ export function Layout(props: PropsWithChildren) {
       <Sidebar />
       <div className="flex flex-col w-10/12 bg-background dark:bg-background border-t">
         <Topbar />
-        <div className="flex flex-1 flex-col p-4 overflow-y-auto">{props.children}</div>
+        <div className="flex flex-1 flex-col p-4 bg-gray-900 overflow-y-auto">{props.children}</div>
       </div>
     </div>
   );

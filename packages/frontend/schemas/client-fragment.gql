@@ -1,0 +1,13 @@
+fragment Client on Client {
+  id
+  name
+  appName
+  connected
+  lastConnected
+  messages {
+    ...Message
+  }
+  logs {
+    ...Log
+  }
+}

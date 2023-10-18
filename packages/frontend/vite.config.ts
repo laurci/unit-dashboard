@@ -33,6 +33,10 @@ export default defineConfig({
         replacement: '/providers/',
       },
       {
+        find: /^@schemas\//,
+        replacement: '/schemas/',
+      },
+      {
         find: /^@utils\//,
         replacement: '/utils/',
       },

@@ -1,12 +1,14 @@
 type Client {
   id: ID!
   name: String
+  appName: String
   connected: Boolean
   lastConnected: DateTime
 }
 
 input ClientCreate {
   name: String
+  appName: String
   connected: Boolean
 }
 
@@ -27,4 +29,10 @@ type Mutation {
   clientConnected(id: ID!): Client!
   clientDisconnected(id: ID!): Client!
   clientCreate(data: ClientCreate!): Client!
+}
+
+type Subscription {
+  clientConnected(): Client!
+  clientDisconnected(): Client!
+  clientCreated(): Client!
 }

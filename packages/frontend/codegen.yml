@@ -17,6 +17,8 @@ generates:
       - typescript-operations
       - typed-document-node
     config:
+      scalars:
+        - Date: string
       documentVariableSuffix: ""
       fragmentVariableSuffix: ""
       documentNodeImport: "@apollo/client#TypedDocumentNode"

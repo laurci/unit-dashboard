@@ -1,0 +1,7 @@
+fragment Log on Log {
+  id
+  type
+  title
+  description
+  createdAt
+}

@@ -27,6 +27,7 @@
       "@hooks/*": ["./hooks/*", "./hooks/"],
       "@pages/*": ["./pages/*", "./pages/"],
       "@providers/*": ["./providers/*", "./providers/"],
+      "@schemas/*": ["./schemas/*", "./schemas/"],
       "@typings/*": ["./typings/*", "./typings/"],
       "@utils/*": ["./utils/*", "./utils/"]
     }

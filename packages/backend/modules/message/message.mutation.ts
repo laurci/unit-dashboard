@@ -8,6 +8,7 @@ Mutation.createMessage(({ args }) => {
     data: {
       value: args.data.value,
       clientId: args.data.clientId,
+      direction: args.data.direction,
     },
   });
 });

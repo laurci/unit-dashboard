@@ -1,3 +1,4 @@
+import OopsPage from '@pages/oops/oops';
 import { ReactNode } from 'react';
 import { IndexRouteObject, NonIndexRouteObject, RouteObject, useParams } from 'react-router-dom';
 import { CreateWrapper, RouteElement, createRouteElement } from './route-element';
@@ -30,6 +31,7 @@ export function createRoute<T extends string>(options: RouteOptions<T>) {
     return {
       ...rest,
       path,
+      ErrorBoundary: options.ErrorBoundary || OopsPage,
       element: createRouteElement(element, fallback, createWrapper),
     };
   };

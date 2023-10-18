@@ -1,0 +1,5 @@
+query GetClient($where: ClientWhereUnique!) {
+  client(where: $where) {
+    ...Client
+  }
+}

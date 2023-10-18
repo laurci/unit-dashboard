@@ -32,6 +32,7 @@ Mutation.clientCreate(({ args }) => {
     data: {
       name: args.data.name,
       connected: args.data.connected,
+      appName: args.data.appName,
     },
   });
 });

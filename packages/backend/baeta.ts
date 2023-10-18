@@ -16,7 +16,7 @@ export default defineConfig({
     extensions: 'extensions',
   },
   compiler: {
-    src: './app',
+    src: ['./app', './seed'],
     dist: 'dist',
     bundleDeps: true,
     bundleWorkspaces: true,

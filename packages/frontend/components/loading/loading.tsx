@@ -12,9 +12,11 @@ export function Loading() {
         }
         return dots + 1;
       });
-    }, 1000);
+    }, 250);
     return () => clearInterval(id);
-  });
+  }, []);
+
+  console.log(dots)
 
   return (
     <div className="flex flex-row justify-center items-center h-screen">

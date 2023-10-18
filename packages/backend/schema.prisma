@@ -11,6 +11,7 @@ datasource db {
 model Client {
     id        String    @id @default(cuid())
     name      String?
+    appName   String?
     connected Boolean   @default(false)
     lastSeen  DateTime?
     createdAt DateTime  @default(now())
@@ -19,11 +20,12 @@ model Client {
 }
 
 model Message {
-    id        String   @id @default(cuid())
+    id        String           @id @default(cuid())
+    direction MessageDirection
     clientId  String
-    client    Client   @relation(fields: [clientId], references: [id])
+    client    Client           @relation(fields: [clientId], references: [id])
     value     String
-    createdAt DateTime @default(now())
+    createdAt DateTime         @default(now())
 }
 
 enum LogType {
@@ -31,6 +33,11 @@ enum LogType {
     INFO
     WARNING
     ERROR
+}
+
+enum MessageDirection {
+    IN
+    OUT
 }
 
 model Log {

@@ -3,17 +3,24 @@ import { TopbarPortal } from '@components/topbar';
 import { Card } from '@components/ui/card';
 import { Input } from '@components/ui/input';
 import { TabsList, TabsTrigger } from '@components/ui/tabs';
+import { FuseOptions, useFuse } from '@hooks/use-fuse';
 import { Tabs } from '@radix-ui/react-tabs';
 import { MessageFragment } from '@schemas/message-fragment.gql';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 
 interface Props {
   data: MessageFragment[];
 }
 
+const fuseOptions: FuseOptions<MessageFragment> = {
+  keys: ['direction', 'value'],
+};
+
 export function Messages(props: Props) {
   const [tab, setTab] = useState('all');
   const [openId, setOpenId] = useState<string>();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [, startTransition] = useTransition();
 
   const filtered = useMemo(() => {
     if (tab === 'in') {
@@ -27,6 +34,8 @@ export function Messages(props: Props) {
     return props.data;
   }, [props.data, tab]);
 
+  const searched = useFuse(filtered, searchTerm, fuseOptions);
+
   const handleOpen = (id: string) => [
     setOpenId((current) => {
       if (current === id) {
@@ -39,7 +48,15 @@ export function Messages(props: Props) {
   return (
     <>
       <TopbarPortal>
-        <Input className="max-w-min" placeholder="Search" />
+        <Input
+          className="max-w-min"
+          placeholder="Search"
+          onChange={(e) => {
+            startTransition(() => {
+              setSearchTerm(e.currentTarget.value);
+            });
+          }}
+        />
       </TopbarPortal>
 
       <div className="flex flex-row mb-4">
@@ -59,8 +76,8 @@ export function Messages(props: Props) {
       </div>
 
       <Card className="flex flex-col p-4">
-        {filtered.length === 0 && <div className="mx-auto my-40">No messages! :(</div>}
-        {filtered.map((message) => (
+        {searched.length === 0 && <div className="mx-auto my-40">No messages! :(</div>}
+        {searched.map((message) => (
           <MessageEntry
             key={message.id}
             data={message}

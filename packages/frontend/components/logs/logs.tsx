@@ -3,19 +3,24 @@ import { TopbarPortal } from '@components/topbar';
 import { Card } from '@components/ui/card';
 import { Input } from '@components/ui/input';
 import { TabsList, TabsTrigger } from '@components/ui/tabs';
+import { FuseOptions, useFuse } from '@hooks/use-fuse';
 import { Tabs } from '@radix-ui/react-tabs';
 import { LogFragment } from '@schemas/log-fragment.gql';
-import { useMemo, useState } from 'react';
+import { useMemo, useState, useTransition } from 'react';
 
 interface Props {
   data: LogFragment[];
 }
 
-export function Logs(props: Props) {
-  const items = props.data;
+const fuseOptions: FuseOptions<LogFragment> = {
+  keys: ['type', 'title', 'description'],
+};
 
+export function Logs(props: Props) {
   const [tab, setTab] = useState('all');
   const [openId, setOpenId] = useState<string>();
+  const [searchTerm, setSearchTerm] = useState<string>('');
+  const [, startTransition] = useTransition();
 
   const filtered = useMemo(() => {
     if (tab === 'debug') {
@@ -37,6 +42,8 @@ export function Logs(props: Props) {
     return props.data;
   }, [props.data, tab]);
 
+  const searched = useFuse(filtered, searchTerm, fuseOptions);
+
   const handleOpen = (id: string) => [
     setOpenId((current) => {
       if (current === id) {
@@ -49,7 +56,15 @@ export function Logs(props: Props) {
   return (
     <>
       <TopbarPortal>
-        <Input className="max-w-min" placeholder="Search" />
+        <Input
+          className="max-w-min"
+          placeholder="Search"
+          onChange={(e) => {
+            startTransition(() => {
+              setSearchTerm(e.currentTarget.value);
+            });
+          }}
+        />
       </TopbarPortal>
 
       <div className="flex flex-row mb-4">
@@ -75,8 +90,8 @@ export function Logs(props: Props) {
       </div>
 
       <Card className="flex flex-col p-4">
-        {filtered.length === 0 && <div className="mx-auto my-40">No logs! :(</div>}
-        {filtered.map((log) => (
+        {searched.length === 0 && <div className="mx-auto my-40">No logs! :(</div>}
+        {searched.map((log) => (
           <LogEntry
             key={log.id}
             data={log}

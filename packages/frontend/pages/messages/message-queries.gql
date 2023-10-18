@@ -1,0 +1,5 @@
+query GetMessages {
+  messages {
+    ...Message
+  }
+}

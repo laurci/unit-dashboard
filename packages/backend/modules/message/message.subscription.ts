@@ -13,4 +13,7 @@ Subscription.messageCreated<Message>({
   subscribe() {
     return pubsub.asyncIterator('message-created');
   },
+  resolve(params) {
+    return params.payload;
+  },
 });

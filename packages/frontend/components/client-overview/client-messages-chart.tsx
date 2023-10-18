@@ -23,6 +23,10 @@ export function ClientMessagesChart(props: Props) {
     ];
   }, [props.data]);
 
+  if (props.data.length === 0) {
+    return null;
+  }
+
   return (
     <div className="flex flex-col">
       <p className="text-lg">Messages</p>

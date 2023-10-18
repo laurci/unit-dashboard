@@ -16,10 +16,23 @@ extend type Client {
   messages: [Message!]
 }
 
+input MessageWhere {
+  clientId: String
+}
+
+input MessageWhereUnique {
+  id: ID!
+}
+
 input MessageCreate {
   value: String!
   clientId: ID!
   direction: MessageDirection!
+}
+
+type Query {
+  message(where: MessageWhereUnique!): Message
+  messages(where: MessageWhere): [Message!]!
 }
 
 type Mutation {

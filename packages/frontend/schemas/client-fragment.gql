@@ -1,13 +1,17 @@
 fragment Client on Client {
-  id
-  name
-  appName
-  connected
-  lastConnected
+  ...ClientOnly
   messages {
     ...Message
   }
   logs {
     ...Log
   }
+}
+
+fragment ClientOnly on Client {
+  id
+  name
+  appName
+  connected
+  lastConnected
 }

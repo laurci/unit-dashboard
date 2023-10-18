@@ -32,6 +32,10 @@ export function ClientLogsChart(props: Props) {
     ];
   }, [props.data]);
 
+  if (props.data.length === 0) {
+    return null;
+  }
+
   const legend = [
     {
       text: 'Debug',

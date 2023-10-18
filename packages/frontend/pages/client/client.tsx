@@ -5,13 +5,17 @@ import { ErrorOops } from '@components/errors/oops';
 import { Loading } from '@components/loading';
 import { Logs } from '@components/logs';
 import { Messages } from '@components/messages';
+import { Subscriptions } from '@components/subscriptions';
 import { TopbarPortal } from '@components/topbar';
 import { Tabs, TabsList, TabsTrigger } from '@components/ui/tabs';
+import { LogFragment } from '@schemas/log-fragment.gql';
+import { MessageFragment } from '@schemas/message-fragment.gql';
+import { insert } from 'ramda';
 import { useSearchParams } from 'react-router-dom';
-import { GetClient } from './client-quries.gql';
+import { GetClient } from './client-queries.gql';
 import { clientRoute } from './client-route';
 
-export default function Client() {
+export default function ClientPage() {
   const params = clientRoute.useParams();
   let [searchParams, setSearchParams] = useSearchParams();
 
@@ -21,13 +25,52 @@ export default function Client() {
     throw new Error('Missing client id');
   }
 
-  const { data, loading, error } = useQuery(GetClient, {
+  const { data, loading, error, updateQuery } = useQuery(GetClient, {
     variables: {
       where: {
         id: params.id,
       },
     },
+    fetchPolicy: 'cache-and-network',
   });
+
+  const handleMessageCreated = (message: MessageFragment) => {
+    updateQuery((previous) => {
+      if (!message.clientId) {
+        return previous;
+      }
+
+      if (!previous.client) {
+        return previous;
+      }
+
+      return {
+        client: {
+          ...previous.client,
+          messages: insert(0, message, previous.client.messages ?? []),
+        },
+      };
+    });
+  };
+
+  const handleLogCreated = (log: LogFragment) => {
+    updateQuery((previous) => {
+      if (!log.clientId) {
+        return previous;
+      }
+
+      if (!previous.client) {
+        return previous;
+      }
+
+      return {
+        client: {
+          ...previous.client,
+          logs: insert(0, log, previous.client.logs ?? []),
+        },
+      };
+    });
+  };
 
   const handleTabChange = (value: string) => {
     setSearchParams({ tab: value });
@@ -47,8 +90,10 @@ export default function Client() {
 
   return (
     <>
+      <Subscriptions onMessageCreated={handleMessageCreated} onLogCreated={handleLogCreated} />
+
       <TopbarPortal>
-        <div className="flex flex-row">
+        <div className="flex flex-row mr-4">
           <Tabs value={tab} className="border rounded-lg w-64">
             <TabsList className="w-full">
               <TabsTrigger value="overview" onClick={() => handleTabChange('overview')}>

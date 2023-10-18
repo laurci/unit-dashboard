@@ -13,4 +13,7 @@ Subscription.logCreated<Log>({
   subscribe() {
     return pubsub.asyncIterator('log-created');
   },
+  resolve(params) {
+    return params.payload;
+  },
 });

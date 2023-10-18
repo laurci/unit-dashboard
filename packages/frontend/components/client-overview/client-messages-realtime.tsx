@@ -53,6 +53,7 @@ export function ClientMessagesRealtime(props: Props) {
   return (
     <div className="flex flex-col w-full">
       <div className="h-96 overflow-y-auto flex-col flex">
+        {items.length === 0 && <div className="m-auto">No messages!</div>}
         {items.map((message) => (
           <MessageEntry
             key={message.id}

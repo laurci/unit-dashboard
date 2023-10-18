@@ -54,6 +54,7 @@ export function ClientLogsRealtime(props: Props) {
   return (
     <div className="flex flex-col w-full">
       <div className="h-96 overflow-y-auto flex-col flex">
+        {items.length === 0 && <div className="m-auto">No logs!</div>}
         {items.map((log) => (
           <LogEntry
             key={log.id}

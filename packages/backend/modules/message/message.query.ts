@@ -1,7 +1,7 @@
 import { prisma } from '@lib/prisma';
 import { getMessageModule } from './typedef';
 
-const { Client, Message } = getMessageModule();
+const { Client, Message, Query } = getMessageModule();
 
 Client.messages(async ({ root }) => {
   return prisma.client
@@ -25,4 +25,23 @@ Message.client(({ root }) => {
       },
     })
     .client();
+});
+
+Query.message(({ args }) => {
+  return prisma.message.findUnique({
+    where: {
+      id: args.where.id,
+    },
+  });
+});
+
+Query.messages(({ args }) => {
+  return prisma.message.findMany({
+    where: {
+      clientId: args?.where?.clientId,
+    },
+    orderBy: {
+      createdAt: 'desc',
+    },
+  });
 });

@@ -1,0 +1,29 @@
+subscription ClientConnected {
+  clientConnected {
+    ...ClientOnly
+  }
+}
+
+subscription ClientDisconnected {
+  clientDisconnected {
+    ...ClientOnly
+  }
+}
+
+subscription ClientCreated {
+  clientCreated {
+    ...Client
+  }
+}
+
+subscription MessageCreated {
+  messageCreated {
+    ...Message
+  }
+}
+
+subscription LogCreated {
+  logCreated {
+    ...Log
+  }
+}

@@ -25,16 +25,26 @@ Subscription.clientConnected<Client>({
   subscribe() {
     return pubsub.asyncIterator('client-connected');
   },
+  resolve(params) {
+    return params.payload;
+  },
 });
 
 Subscription.clientDisconnected<Client>({
   subscribe() {
     return pubsub.asyncIterator('client-disconnected');
   },
+  resolve(params) {
+    return params.payload;
+  },
 });
 
 Subscription.clientCreated<Client>({
   subscribe() {
     return pubsub.asyncIterator('client-created');
+  },
+  resolve(params) {
+    console.log('params');
+    return params.payload;
   },
 });

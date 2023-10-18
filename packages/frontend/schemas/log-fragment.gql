@@ -2,6 +2,7 @@ fragment Log on Log {
   id
   type
   title
+  clientId
   description
   createdAt
 }

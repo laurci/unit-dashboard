@@ -5,17 +5,27 @@ import { Input } from '@components/ui/input';
 import { TabsList, TabsTrigger } from '@components/ui/tabs';
 import { Tabs } from '@radix-ui/react-tabs';
 import { MessageFragment } from '@schemas/message-fragment.gql';
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
 interface Props {
   data: MessageFragment[];
 }
 
 export function Messages(props: Props) {
-  const items = props.data;
-
   const [tab, setTab] = useState('all');
   const [openId, setOpenId] = useState<string>();
+
+  const filtered = useMemo(() => {
+    if (tab === 'in') {
+      return props.data.filter((el) => el.direction === 'IN');
+    }
+
+    if (tab === 'out') {
+      return props.data.filter((el) => el.direction === 'OUT');
+    }
+
+    return props.data;
+  }, [props.data, tab]);
 
   const handleOpen = (id: string) => [
     setOpenId((current) => {
@@ -29,7 +39,7 @@ export function Messages(props: Props) {
   return (
     <>
       <TopbarPortal>
-        <Input className="ml-4 max-w-min" placeholder="Search" />
+        <Input className="max-w-min" placeholder="Search" />
       </TopbarPortal>
 
       <div className="flex flex-row mb-4">
@@ -49,7 +59,8 @@ export function Messages(props: Props) {
       </div>
 
       <Card className="flex flex-col p-4">
-        {items.map((message) => (
+        {filtered.length === 0 && <div className="mx-auto my-40">No messages! :(</div>}
+        {filtered.map((message) => (
           <MessageEntry
             key={message.id}
             data={message}

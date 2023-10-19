@@ -6,8 +6,11 @@
   ],
   "scripts": {
     "backend": "yarn workspace @unit/dashboard-backend",
+    "build:all": "yarn frontend build && yarn backend build && yarn frontend build:docker && yarn backend build:docker",
     "frontend": "yarn workspace @unit/dashboard-frontend",
-    "prisma": "yarn workspace @unit/dashboard-backend prisma"
+    "prisma": "yarn workspace @unit/dashboard-backend prisma",
+    "push": "yarn build:all && yarn push:all",
+    "push:all": "yarn frontend build:push && yarn backend build:push"
   },
   "devDependencies": {
     "@types/prop-types": "^15",

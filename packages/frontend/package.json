@@ -6,6 +6,7 @@
   "scripts": {
     "build": "tsc && vite build",
     "build:docker": "docker build -f ../../docker/dockerfile.frontend -t laurci/unit-dashboard-ui:latest .",
+    "build:push": "docker push laurci/unit-dashboard-ui:latest",
     "generate": "yarn graphql-codegen",
     "generate:dev": "yarn graphql-codegen -w",
     "lint": "eslint . --ext ts,tsx --report-unused-disable-directives --max-warnings 0",

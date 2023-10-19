@@ -4,6 +4,7 @@
   "scripts": {
     "build": "baeta build --generate",
     "build:docker": "docker build -f ../../docker/dockerfile.backend -t laurci/unit-dashboard-api:latest .",
+    "build:push": "docker push laurci/unit-dashboard-api:latest",
     "prisma": "pnpify prisma",
     "start": "baeta build --watch --generate --onSuccess='dotenv -- node --enable-source-maps --inspect dist/app'"
   },

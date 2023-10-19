@@ -64,7 +64,7 @@ const apolloMiddleware = expressMiddleware(apollo, {
 app.use(
   '/graphql',
   cors<cors.CorsRequest>({
-    origin: ['https://demo-dashboard-ui.unit.planck.ws'],
+    origin: ['https://demo-dashboard.unit.planck.ws'],
   }),
   bodyParser.json(),
   apolloMiddleware

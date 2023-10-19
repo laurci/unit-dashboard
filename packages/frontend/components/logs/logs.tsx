@@ -57,7 +57,7 @@ export function Logs(props: Props) {
     <>
       <TopbarPortal>
         <Input
-          className="max-w-min"
+          className="w-64"
           placeholder="Search"
           onChange={(e) => {
             startTransition(() => {

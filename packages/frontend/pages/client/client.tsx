@@ -107,7 +107,9 @@ export default function ClientPage() {
               </TabsTrigger>
             </TabsList>
           </Tabs>
-          <p className="ml-4 my-auto border rounded-lg p-2">{data.client.name}</p>
+          {data.client.name && (
+            <p className="ml-4 my-auto border rounded-lg p-2">{data.client.name}</p>
+          )}
         </div>
       </TopbarPortal>
 

@@ -17,3 +17,7 @@ Subscription.logCreated<Log>({
     return params.payload;
   },
 });
+
+Subscription.logCreated.subscribe.$auth({
+  isAuthenticated: true,
+});

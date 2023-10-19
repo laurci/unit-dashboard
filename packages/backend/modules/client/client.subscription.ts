@@ -44,7 +44,18 @@ Subscription.clientCreated<Client>({
     return pubsub.asyncIterator('client-created');
   },
   resolve(params) {
-    console.log('params');
     return params.payload;
   },
+});
+
+Subscription.clientConnected.subscribe.$auth({
+  isAuthenticated: true,
+});
+
+Subscription.clientDisconnected.subscribe.$auth({
+  isAuthenticated: true,
+});
+
+Subscription.clientCreated.subscribe.$auth({
+  isAuthenticated: true,
 });

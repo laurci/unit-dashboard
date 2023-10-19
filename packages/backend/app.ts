@@ -31,7 +31,28 @@ const ws = new WebSocketServer({
   server: httpServer,
 });
 
-const cleanup = useServer({ schema: baeta.schema }, ws);
+const cleanup = useServer(
+  {
+    schema: baeta.schema,
+    onConnect(ctx) {
+      const authToken = ctx.connectionParams?.authorization;
+
+      if (authToken !== `Bearer ${env.authToken}`) {
+        return false;
+      }
+
+      return true;
+    },
+    context: (ctx): Context => {
+      const authToken = ctx.connectionParams?.authorization as string;
+      return {
+        authToken,
+        pubsub,
+      };
+    },
+  },
+  ws
+);
 
 const httpDrainPlugin = ApolloServerPluginDrainHttpServer({ httpServer });
 

@@ -17,3 +17,7 @@ Subscription.messageCreated<Message>({
     return params.payload;
   },
 });
+
+Subscription.messageCreated.subscribe.$auth({
+  isAuthenticated: true,
+});

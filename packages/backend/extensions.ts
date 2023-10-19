@@ -37,9 +37,6 @@ const auth = authExtension<Context>(
       Mutation: {
         isAuthenticated: true,
       },
-      Subscription: {
-        isAuthenticated: true,
-      },
     },
   }
 );

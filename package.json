@@ -13,7 +13,6 @@
     "push:all": "yarn frontend build:push && yarn backend build:push",
     "push:frontend": "yarn frontend build && yarn frontend build:docker && yarn frontend build:push",
     "push:backend": "yarn backend build && yarn backend build:docker && yarn backend build:push"
-
   },
   "devDependencies": {
     "@types/prop-types": "^15",

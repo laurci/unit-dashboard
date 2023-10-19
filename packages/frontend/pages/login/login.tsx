@@ -48,8 +48,6 @@ export function Login(props: LoginProps) {
 export function LoginProvider(props: PropsWithChildren) {
   const { loading, data, error, refetch } = useQuery(TryLogin);
 
-  console.log({ loading, data, error });
-
   if (loading) {
     return <Loading />;
   }

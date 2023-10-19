@@ -65,6 +65,7 @@ app.use(
   '/graphql',
   cors<cors.CorsRequest>({
     origin: ['https://demo-dashboard.unit.planck.ws'],
+    credentials: true,
   }),
   bodyParser.json(),
   apolloMiddleware

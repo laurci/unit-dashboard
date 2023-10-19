@@ -2,7 +2,7 @@
   "name": "@unit/dashboard-backend",
   "type": "module",
   "scripts": {
-    "build": "baeta build --generate",
+    "build": "baeta build --generate && tsc",
     "build:docker": "docker build -f ../../docker/dockerfile.backend -t laurci/unit-dashboard-api:latest .",
     "build:push": "docker push laurci/unit-dashboard-api:latest",
     "prisma": "pnpify prisma",

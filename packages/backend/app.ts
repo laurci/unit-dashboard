@@ -61,7 +61,14 @@ const apolloMiddleware = expressMiddleware(apollo, {
   },
 });
 
-app.use('/graphql', cors<cors.CorsRequest>(), bodyParser.json(), apolloMiddleware);
+app.use(
+  '/graphql',
+  cors<cors.CorsRequest>({
+    origin: ['https://demo-dashboard-ui.unit.planck.ws'],
+  }),
+  bodyParser.json(),
+  apolloMiddleware
+);
 
 await new Promise<void>((resolve) => httpServer.listen({ port: env.port }, resolve));
 

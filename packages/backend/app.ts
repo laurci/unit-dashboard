@@ -9,6 +9,8 @@ import { Context } from '@typings/context';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 import express from 'express';
+import fs from 'fs/promises';
+import { printSchema } from 'graphql';
 import { useServer } from 'graphql-ws/lib/use/ws';
 import { createServer } from 'http';
 import { WebSocketServer } from 'ws';
@@ -18,6 +20,9 @@ const baeta = createApplication({
   pruneSchema: true,
 });
 
+if (!env.production) {
+  fs.writeFile('./schema.graphql', printSchema(baeta.schema));
+}
 const app = express();
 const httpServer = createServer(app);
 

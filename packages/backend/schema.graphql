@@ -1,0 +1,128 @@
+directive @validFloat(multipleOf: Float, max: Float, min: Float, exclusiveMax: Float, exclusiveMin: Float, oneOf: [Float!], notOneOf: [Float!]) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @validInt(multipleOf: Int, max: Int, min: Int, exclusiveMax: Int, exclusiveMin: Int, oneOf: [Int!], notOneOf: [Int!]) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @validString(maxLength: Int, minLength: Int, startsWith: String, endsWith: String, includes: String, regex: String, regexFlags: String, oneOf: [String!], notOneOf: [String!]) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @constraints(minFields: Int, maxFields: Int) on INPUT_OBJECT
+
+directive @trim(start: Boolean, end: Boolean) on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @lower on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+directive @upper on INPUT_FIELD_DEFINITION | ARGUMENT_DEFINITION
+
+type Query {
+  tryLogin: Boolean
+  clients(where: ClientWhere): [Client!]!
+  client(where: ClientWhereUnique!): Client
+  logs(where: LogWhere): [Log!]!
+  log(where: LogWhereUnique!): Log
+  message(where: MessageWhereUnique!): Message
+  messages(where: MessageWhere): [Message!]!
+}
+
+type Client {
+  id: ID!
+  name: String
+  appName: String
+  connected: Boolean
+  lastConnected: DateTime
+  logs: [Log!]
+  messages: [Message!]
+}
+
+input ClientCreate {
+  name: String
+  appName: String
+  connected: Boolean
+}
+
+input ClientWhere {
+  connected: Boolean
+}
+
+input ClientWhereUnique {
+  id: ID!
+}
+
+type Mutation {
+  clientConnected(id: ID!): Client!
+  clientDisconnected(id: ID!): Client!
+  clientCreate(data: ClientCreate!): Client!
+  logCreate(data: LogCreate!): Log!
+  createMessage(data: MessageCreate!): Message!
+}
+
+type Subscription {
+  clientConnected: Client!
+  clientDisconnected: Client!
+  clientCreated: Client!
+  logCreated: Log!
+  messageCreated: Message!
+}
+
+type Log {
+  id: ID!
+  type: LogType!
+  title: String!
+  description: String!
+  clientId: String
+  client: Client
+  createdAt: DateTime!
+}
+
+enum LogType {
+  DEBUG
+  INFO
+  WARNING
+  ERROR
+}
+
+input LogCreate {
+  type: LogType!
+  title: String!
+  description: String!
+  clientId: String
+}
+
+input LogWhere {
+  clientId: String
+}
+
+input LogWhereUnique {
+  id: ID!
+}
+
+type Message {
+  id: ID!
+  value: String!
+  direction: MessageDirection!
+  clientId: ID!
+  client: Client
+  createdAt: DateTime!
+}
+
+enum MessageDirection {
+  IN
+  OUT
+}
+
+input MessageWhere {
+  clientId: String
+}
+
+input MessageWhereUnique {
+  id: ID!
+}
+
+input MessageCreate {
+  value: String!
+  clientId: ID!
+  direction: MessageDirection!
+}
+
+"""
+A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `date-time` format outlined in section 5.6 of the RFC 3339 profile of the ISO 8601 standard for representation of dates and times using the Gregorian calendar.
+"""
+scalar DateTime

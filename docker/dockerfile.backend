@@ -4,5 +4,9 @@ WORKDIR /app
 
 COPY package.json /app/package.json
 COPY ./dist /app/dist
+COPY migrations /app/migrations
+COPY schema.prisma /app/schema.prisma
+COPY scripts /app/scripts
 
+ENTRYPOINT [ "scripts/setup.sh" ]
 CMD ["node", "dist/app.js"]

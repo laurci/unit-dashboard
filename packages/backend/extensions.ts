@@ -1,21 +1,21 @@
 import { createExtensions } from '@baeta/core';
 import { UnauthenticatedError } from '@baeta/errors';
 import { authExtension } from '@baeta/extension-auth';
+import { env } from '@lib/env';
 import { Context } from './typings/context';
 
 declare global {
   export namespace AuthExtension {
     export interface Scopes {
       isPublic: boolean;
-      isLoggedIn: boolean;
-      hasAccess: string;
+      isAuthenticated: boolean;
     }
   }
 }
 
-function isLoggedIn(ctx: Context) {
+function isAuthenticated(ctx: Context) {
   return () => {
-    if (ctx.userId !== null) {
+    if (ctx.authToken !== `Bearer ${env.authToken}`) {
       throw new UnauthenticatedError();
     }
     return true;
@@ -24,26 +24,22 @@ function isLoggedIn(ctx: Context) {
 
 const auth = authExtension<Context>(
   async (ctx) => {
-    const accessList: string[] = [];
     return {
       isPublic: true,
-      isLoggedIn: isLoggedIn(ctx),
-      hasAccess: (access: string) => {
-        return accessList.includes(access);
-      },
+      isAuthenticated: isAuthenticated(ctx),
     };
   },
   {
     defaultScopes: {
-      // Query: {
-      //   isLoggedIn: true,
-      // },
-      // Mutation: {
-      //   isLoggedIn: true,
-      // },
-      // Subscription: {
-      //   isLoggedIn: true,
-      // },
+      Query: {
+        isAuthenticated: true,
+      },
+      Mutation: {
+        isAuthenticated: true,
+      },
+      Subscription: {
+        isAuthenticated: true,
+      },
     },
   }
 );

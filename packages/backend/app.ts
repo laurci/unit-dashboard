@@ -50,6 +50,7 @@ await apollo.start();
 const apolloMiddleware = expressMiddleware(apollo, {
   context: async ({ req }) => {
     return {
+      authToken: req.headers.authorization,
       pubsub,
     };
   },

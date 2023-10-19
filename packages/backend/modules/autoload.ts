@@ -3,6 +3,8 @@
 /* eslint-disable */
 /* prettier-ignore */
 
+import "./authentication/authentication.query";
+
 import "./baeta-directives/directives.baeta";
 
 import "./client/client.mutation";
@@ -27,6 +29,8 @@ import "./scalars/scalars.resolver";
 
 import "./baeta-directives/directives.baeta";
 
+import {getAuthenticationModule} from "./authentication/typedef";
+
 import {getBaetaDirectivesModule} from "./baeta-directives/typedef";
 
 import {getClientModule} from "./client/typedef";
@@ -37,4 +41,4 @@ import {getMessageModule} from "./message/typedef";
 
 import {getScalarsModule} from "./scalars/typedef";
 
-export const modules = [getBaetaDirectivesModule(), getClientModule(), getLogModule(), getMessageModule(), getScalarsModule()];
+export const modules = [getAuthenticationModule(), getBaetaDirectivesModule(), getClientModule(), getLogModule(), getMessageModule(), getScalarsModule()];

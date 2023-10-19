@@ -23,5 +23,9 @@ export const env = {
       return value === 'production';
     },
   }),
-};
 
+  authToken: createEnvParam<string>('AUTH_TOKEN', {
+    required: true,
+    type: 'string',
+  }),
+};

@@ -1,5 +1,6 @@
 import { ApolloClient, from, HttpLink, InMemoryCache } from '@apollo/client';
 import { env } from '@lib/env/env';
+import { authLink } from './apollo-auth';
 import { createHttpWsLink } from './apollo-http-ws';
 import { WebSocketLink } from './apollo-ws';
 
@@ -16,5 +17,5 @@ const httpWslink = createHttpWsLink(httpLink, wsLink);
 
 export const apollo = new ApolloClient({
   cache: new InMemoryCache(),
-  link: from([httpWslink]),
+  link: from([authLink, httpWslink]),
 });

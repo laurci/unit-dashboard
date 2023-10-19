@@ -10,7 +10,10 @@
     "frontend": "yarn workspace @unit/dashboard-frontend",
     "prisma": "yarn workspace @unit/dashboard-backend prisma",
     "push": "yarn build:all && yarn push:all",
-    "push:all": "yarn frontend build:push && yarn backend build:push"
+    "push:all": "yarn frontend build:push && yarn backend build:push",
+    "push:frontend": "yarn frontend build && yarn frontend build:docker && yarn frontend build:push",
+    "push:backend": "yarn backend build && yarn backend build:docker && yarn backend build:push"
+
   },
   "devDependencies": {
     "@types/prop-types": "^15",

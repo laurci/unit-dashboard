@@ -6,7 +6,7 @@ export default defineConfig({
   plugins: [react()],
   cacheDir: '.vite',
   build: {
-    outDir: '.dist',
+    outDir: 'dist',
     chunkSizeWarningLimit: 768,
   },
   resolve: {
